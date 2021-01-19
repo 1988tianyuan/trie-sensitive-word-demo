@@ -10,10 +10,11 @@ import java.util.Objects;
 
 public class TrieSensitiveWordChecker {
 
-    private TrieNode rootNode = new TrieNode();
+    private TrieNode rootNode = null;
 
-    public void initTrie() {
-        try (InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream("SensitiveWords.txt")) {
+    public void initTrie(String sensitiveWordsFilePath) {
+        rootNode = new TrieNode();
+        try (InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream(sensitiveWordsFilePath)) {
             if (is == null) {
                 return;
             }
@@ -33,6 +34,10 @@ public class TrieSensitiveWordChecker {
      * @return 将输入文本中的敏感词进行替换后的结果
      */
     public String filter(String text){
+        if (rootNode == null) {
+            System.err.println("请先初始化敏感词过滤器");
+            return null;
+        }
         if(StringUtils.isEmpty(text)){
             return text;
         }

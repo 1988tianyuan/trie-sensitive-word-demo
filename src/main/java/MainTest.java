@@ -5,7 +5,8 @@ public class MainTest {
      */
     public static void main(String[] args) {
         TrieSensitiveWordChecker checker = new TrieSensitiveWordChecker();
-        checker.initTrie();
-        System.out.println(checker.filter("色的    暴 力的赌的多 对多赌 博的的暴力的色 情多对多色情狂"));
+        checker.initTrie("SensitiveWords.txt");
+        String result = checker.filter("色的    暴 力的赌的多 对多赌 博的的暴力的色 情多对多色情狂");
+        System.out.println(result);
     }
 }
